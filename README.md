@@ -2,6 +2,15 @@
 
 [Live Demo](https://astro-platform-starter.netlify.app/)
 
+> **Nota da auditoria (2026-11-22):** este repositório é uma cópia não modificada do template
+> [netlify-templates/astro-platform-starter](https://github.com/netlify-templates/astro-platform-starter)
+> (nenhum commit do dono da conta). Ainda usa **Astro 4**, que tem vulnerabilidades críticas
+> corrigidas só no Astro 7+; veja `docs/auditoria/AUDITORIA-2026-11-22.md`.
+>
+> - Build: `npm ci && npm run build` (Node 20 recomendado). CI: `.github/workflows/ci.yml` (build + `npm audit` informativo, sem deploy).
+> - Não há testes automatizados (o template não traz).
+> - Variáveis de ambiente (ver `.env.example`): `PUBLIC_DISABLE_UPLOADS` (`true` desativa upload no Blob Store); `CONTEXT` é definida pela própria Netlify.
+
 A modern starter based on Astro.js, Tailwind, daisyUI, and [Netlify Core Primitives](https://docs.netlify.com/core/overview/#develop) (Edge Functions, Image CDN, Blob Store).
 
 ## Astro Commands
