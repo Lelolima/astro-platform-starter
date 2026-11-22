@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      # Informativo: as vulnerabilidades restantes exigem migração Astro 4 -> 7
+      # (ver docs/auditoria/AUDITORIA-2026-11-22.md). Não bloqueia o build.
+      - name: npm audit (informativo)
+        run: npm audit --omit=dev || echo "::warning::npm audit encontrou vulnerabilidades que exigem migração de versão major do Astro"
